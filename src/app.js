@@ -26,7 +26,11 @@ class Player {
     constructor(id, name, type) {
         // Create member variables and assign values
         // Type your code
-
+        this.id = id;
+        this.name = name;
+        this.type = hero || villan;
+        img: "images/hero-1.png",
+            strength = getRandomStrength();
     }
 
     // getting random strength
@@ -39,7 +43,6 @@ class Player {
         // Accumulate HTML template
         // Type your code here
 
-    
         return player;
     }
 }
@@ -47,10 +50,12 @@ class Player {
 // Superwar Class
 class Superwar {
     constructor(players) {
-    // Create a field players 
-    // Use Map method to loop through players argument and create new players
-    // Type your code here
-
+        // Create a field players 
+        // Use Map method to loop through players argument and create new players
+        // Type your code here
+        let newPlayer = new players.map(function (index, item, array) {
+            returm index, item;
+        });
     }
 
     // Display players in HTML
