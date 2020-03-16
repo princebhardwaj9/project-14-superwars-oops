@@ -60,6 +60,13 @@ class Superwar {
 
     // Display players in HTML
     viewPlayers = () => {
+        view = () => {
+            `<div class="player" data-id="${players[i].id}">`
+            `<img src="${players[i].image}">`
+            `<div class="name">${players[i].name}</div>`
+            `<div class="strength">${players[i].strength}</div>`
+            `</div>`
+        }
         let team = document.getElementById('heroes');
         team.innerHTML = '';
         let fragment =
