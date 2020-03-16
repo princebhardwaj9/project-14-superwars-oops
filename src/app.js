@@ -28,9 +28,11 @@ class Player {
         // Type your code
         this.id = id;
         this.name = name;
-        this.type = hero || villan;
-        img: "images/hero-1.png",
-            strength = getRandomStrength();
+        this.image = "images/super-" + (id + 1) + ".png";
+        this.strength = this.getRandomStrength();
+        this.type = type;
+        this.selected = false;
+        this.wins = 0;
     }
 
     // getting random strength
@@ -42,7 +44,19 @@ class Player {
     view = () => {
         // Accumulate HTML template
         // Type your code here
-
+        let player = document.createElement('div');
+        player.classList.add('player');
+        player.setAttribute('data-id', this.id);
+        if (this.selected == true)
+            player.classList.add('selected');
+        let image = document.createElement('img');
+        image.setAttribute('src', this.image);
+        let name = document.createElement('div');
+        name.textContent = this.name;
+        let strength = document.createElement('div');
+        strength.textContent = this.strength;
+        strength.className = 'strength';
+        player.append(image, name, strength);
         return player;
     }
 }
@@ -53,20 +67,20 @@ class Superwar {
         // Create a field players 
         // Use Map method to loop through players argument and create new players
         // Type your code here
-        let newPlayer = new players.map(function (index, item, array) {
-            returm index, item;
+        this.players = players.map((player, i) => {
+            let type = (i % 2 == 0) ? 'hero' : 'villain';
+            return new Player(i, player, type);
         });
+        this.score = [0, 0];
+        Array.from(document.getElementsByClassName('team'))
+            .forEach(elem => elem
+                .addEventListener('click', (e) => {
+                    this.handleSelection(e.target);
+                }));
     }
 
     // Display players in HTML
     viewPlayers = () => {
-        view = () => {
-            `<div class="player" data-id="${players[i].id}">`
-            `<img src="${players[i].image}">`
-            `<div class="name">${players[i].name}</div>`
-            `<div class="strength">${players[i].strength}</div>`
-            `</div>`
-        }
         let team = document.getElementById('heroes');
         team.innerHTML = '';
         let fragment =
